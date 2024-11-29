@@ -35,15 +35,19 @@ def analysis():
 
 def team():    
     # Placeholder images (replace these with actual image paths or URLs)
-    placeholder_image = "https://www.freshbooks.com/wp-content/uploads/2021/10/what-is-teamwork.jpg"
+    charlie = "https://pbs.twimg.com/profile_images/1308737414622523392/0sp7hZnl_400x400.jpg"
+    patrick = "https://media.licdn.com/dms/image/v2/D4E03AQFkZU80mmlO_Q/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1728603648025?e=1738195200&v=beta&t=NF73htQsHJUOPydU0iM3JtYkBcX6QtUqPm7nadJg9Z8"
+    herman = "https://media.licdn.com/dms/image/v2/D4D03AQEmix5C_NCUmw/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1722878460687?e=1738195200&v=beta&t=Lq3S0aGCQDa1SFfeRE_4nKMQWLfECBRVAkXdBmRZq5w"
+    groupie = "https://media.licdn.com/dms/image/v2/D4E03AQH9fAFmyOeKqg/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1689583863282?e=1738195200&v=beta&t=X5TX8UYRiHAyu5OJwHaXTicXj161zI5QKLqS_gmj_C8"
+    tom = "https://media.licdn.com/dms/image/v2/D5603AQF1V-lIwfF1cQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1731794459905?e=1738195200&v=beta&t=2qviQU4GF4GclGxVW9GrbnOyBpP8UqzmhK0xnllCxRk"
 
     # Team members' data
     team = [
-        {"name": "Charlie Shirazi", "title": "Team Lead",  "image": placeholder_image},
-        {"name": "Patrick Sweeney", "title": "Data Analyst",  "image": placeholder_image},
-        {"name": "Tom Rush", "title": "Design Lead", "image": placeholder_image},
-        {"name": "Herman Hesby", "title": "Organizer", "image": placeholder_image},
-        {"name": "Christian Agreda", "title": "Model Developer/Test Subject/Groupie",  "image": placeholder_image},
+        {"name": "Charlie Shirazi", "title": "Team Lead",  "image": charlie},
+        {"name": "Patrick Sweeney", "title": "Data Analyst",  "image": patrick},
+        {"name": "Tom Rush", "title": "Design Lead", "image": tom},
+        {"name": "Herman Hesby", "title": "Organizer", "image": herman},
+        {"name": "Christian Agreda", "title": "Model Developer/Test Subject/Groupie",  "image": groupie},
     ]
 
     # Create columns for team members
@@ -56,7 +60,16 @@ def team():
         with col:
             # Display team member image
             image = Image.open(requests.get(member["image"], stream=True).raw)
-            st.image(image, use_container_width=True)
+
+            # Set the desired height
+            desired_height = 200
+            # Calculate the new width to maintain the aspect ratio
+            aspect_ratio = image.width / image.height
+            new_width = int(desired_height * aspect_ratio)
+            # Resize the image
+            resized_image = image.resize((new_width, desired_height))
+
+            st.image(resized_image, use_container_width=False)
 
             # Display team member details
             st.subheader(f"**{member['name']}**", divider="red")
@@ -65,7 +78,7 @@ def team():
     st.image('shame-game-of-thrones.gif')
 
 
-st.balloons()
+#st.balloons()
 
 
 def streamlit_menu():
