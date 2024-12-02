@@ -25,6 +25,15 @@ st.markdown(html_header, unsafe_allow_html=True)
 
 def home():
     st.title('Home')
+    st.header('Student Alcohol Consumption')
+    st.write('We decided to explore data related to alcohol consumption by students in secondary school.')
+    st.write('This data contains personal information about the student, family information about the student, and educational information about the student.')
+    
+    st.subheader('Questions')
+    st.write('1. Does alcohol consumption affect student performance?')
+    st.write('2. Is alcohol consumption a significant predictor of academic success?')
+    st.write('3. Does studying less or drinking more have more of an effect on academic performance?')
+    
 
 
 def data():
