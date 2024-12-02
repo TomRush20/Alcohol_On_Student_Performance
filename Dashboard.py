@@ -33,7 +33,13 @@ def home():
     st.write('1. Does alcohol consumption affect student performance?')
     st.write('2. Is alcohol consumption a significant predictor of academic success?')
     st.write('3. Does studying less or drinking more have more of an effect on academic performance?')
-    
+    st.write('4. What are the common traits among the students who consume alcohol frequently?')
+    st.write('5. What influences academic performance the most?')
+    st.write('6. Should students abstain from alcohol in order to do better in school?')
+    st.write('7. Do students in relationships tend to drink more?')
+    st.write('8. How does alcohol consumption vary among genders?')
+    st.write('9. Does going out tend to get in the way of studying?')
+    st.write('10. Do students who only drink on weekends tend to perform better in school?')
 
 
 def data():
