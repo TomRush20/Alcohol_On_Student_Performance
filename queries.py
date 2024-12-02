@@ -26,8 +26,8 @@ def sqlite_to_dataframe(sql_script):
 Q8 = """
 SELECT
 	sex,
-	round(SUM(workday_alcohol) / CAST(COUNT(sex) AS REAL),2) AS 'Male_Workday_Consumpton',
-	round(SUM(weekend_alcohol) / CAST(COUNT(sex) AS REAL),2) AS 'Male_Weekend_Consumption'
+	round(AVG(workday_alcohol),2) AS 'Male_Workday_Consumpton',
+	round(AVG(weekend_alcohol),2) AS 'Male_Weekend_Consumption'
 FROM
 	student
 GROUP BY
