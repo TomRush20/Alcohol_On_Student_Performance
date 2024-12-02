@@ -1,0 +1,9 @@
+SELECT sex, SUM(workday_alcohol) / CAST(COUNT(sex) AS REAL) AS 'Male_Workday_Consumpton', SUM(weekend_alcohol) / CAST(COUNT(sex) AS REAL) AS 'Male_Weekend_Consumption'
+FROM student
+GROUP BY sex
+HAVING sex = 'M';
+
+SELECT sex, SUM(workday_alcohol) / CAST(COUNT(sex) as REAL) AS 'Female_Workday_Consumpton', SUM(weekend_alcohol) / CAST(COUNT(sex) AS REAL) AS 'Female_Weekend_Consumption'
+FROM student
+GROUP BY sex
+HAVING sex = 'F';
