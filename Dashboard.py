@@ -5,6 +5,7 @@ import plotly.express as px
 from streamlit_option_menu import option_menu
 from PIL import Image
 import requests
+import queries
 
 
 st.set_page_config(layout='wide',initial_sidebar_state="collapsed")
@@ -44,9 +45,28 @@ def home():
 
 def data():
     st.title('Data Overview')
+    
 
 def analysis():
     st.title('Analysis')
+
+    st.title('How does alcohol consumption vary among genders?')
+    #st.dataframe(queries.Q8, hide_index=True)
+
+    Q8_plot = queries.Q8.melt(id_vars="sex", var_name="Consumption Type", value_name="Average Consumption")
+    # Create a bar chart using Plotly Express
+    fig = px.bar(
+        Q8_plot,
+        x="sex",
+        y="Average Consumption",
+        color="Consumption Type",
+        barmode="group",
+        title="Alcohol Consumption by Sex",
+        labels={"Sex": "Sex", "Average Consumption": "Average Consumption Ranking (1-5)"}
+    )
+    st.plotly_chart(fig)
+
+
 
 def team():    
     # Placeholder images (replace these with actual image paths or URLs)
