@@ -1,3 +1,9 @@
+#import subprocess
+# Install a package using pip
+#package_name = "streamlit_option_menu"
+#subprocess.run(["pip", "install", package_name])
+
+
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -48,23 +54,41 @@ def data():
     
 
 def analysis():
-    st.title('Analysis')
+    st.title('Study Time vs Going Out Relationship')
+    # Reshape the DataFrame to a long format
+    figplt = queries.byGrade.melt(id_vars="Final Grade", var_name="Ranking Type", value_name="Average")
 
+    # Create a grouped bar chart
+    fig = px.bar(
+        figplt,
+        x="Final Grade",
+        y="Average",
+        color="Ranking Type",
+        barmode="group",
+        title="Average Study and Party Ranking by Final Grade",
+        labels={"final_grade": "Final Grade", "Average": "Average Ranking"}
+    )
+    st.plotly_chart(fig)
+
+
+######  Q8  #######
     st.title('How does alcohol consumption vary among genders?')
     #st.dataframe(queries.Q8, hide_index=True)
-
-    Q8_plot = queries.Q8.melt(id_vars="sex", var_name="Consumption Type", value_name="Average Consumption")
+    Q8_plot = queries.Q8.melt(id_vars="Gender", var_name="Consumption Type", value_name="Average Consumption")
     # Create a bar chart using Plotly Express
     fig = px.bar(
         Q8_plot,
-        x="sex",
+        x="Gender",
         y="Average Consumption",
         color="Consumption Type",
         barmode="group",
-        title="Alcohol Consumption by Sex",
-        labels={"Sex": "Sex", "Average Consumption": "Average Consumption Ranking (1-5)"}
+        title="Alcohol Consumption by Gender",
+        labels={"Gender": "Gender", "Average Consumption": "Average Consumption Ranking (1-5)"}
     )
     st.plotly_chart(fig)
+
+
+######  Q9  #######
 
 
 

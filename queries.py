@@ -23,15 +23,28 @@ def sqlite_to_dataframe(sql_script):
     
     return results
 
+# All students scatter plot, study & going out times
+byGrade = """
+SELECT final_grade as 'Final Grade' ,round(AVG(study_time),2) AS 'Average Study Ranking', round(AVG(go_out),2) AS 'Average Party Ranking'
+FROM student
+INNER JOIN grades
+ON student.student_id = grades.student_id
+GROUP BY final_grade 
+ORDER BY round(AVG(study_time),2) DESC
+"""
+byGrade = sqlite_to_dataframe(byGrade)
+
+
+# How does alcohol consumption vary among genders?
 Q8 = """
 SELECT
-	sex,
-	round(AVG(workday_alcohol),2) AS 'Male_Workday_Consumpton',
-	round(AVG(weekend_alcohol),2) AS 'Male_Weekend_Consumption'
+	sex as Gender,
+	round(AVG(workday_alcohol),2) AS 'Workday Consumpton',
+	round(AVG(weekend_alcohol),2) AS 'Weekend Consumption'
 FROM
 	student
 GROUP BY
-	sex
+	Gender
 """
 Q8 = sqlite_to_dataframe(Q8)
 
