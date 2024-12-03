@@ -69,7 +69,11 @@ def analysis():
         labels={"final_grade": "Final Grade", "Average": "Average Ranking"}
     )
     st.plotly_chart(fig)
-
+######  Q1  #######
+    st.title('Does alcohol consumption affect student performance?')
+    question_1 = pd.DataFrame(queries.Q1)
+    Q1_chart = px.line(question_1, x='Final Grade', y='Average Workday Consumption')
+    st.plotly_chart(Q1_chart)
 
 ######  Q8  #######
     st.title('How does alcohol consumption vary among genders?')

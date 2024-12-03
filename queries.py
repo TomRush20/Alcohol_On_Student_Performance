@@ -34,6 +34,23 @@ ORDER BY round(AVG(study_time),2) DESC
 """
 byGrade = sqlite_to_dataframe(byGrade)
 
+#Does alcohol consumption affect student performance?
+Q1 = """
+SELECT 
+	g.final_grade as "Final Grade",
+	AVG(s.workday_alcohol) as "Average Workday Consumption"  
+FROM
+	student s
+join
+	grades g
+on
+	s.student_id = g.student_id 
+GROUP BY
+	g.final_grade
+order BY 
+	"Average Workday Consumption" DESC;
+"""
+Q1 = sqlite_to_dataframe(Q1)
 
 # How does alcohol consumption vary among genders?
 Q8 = """
