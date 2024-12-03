@@ -90,7 +90,11 @@ def analysis():
 
 ######  Q9  #######
 
-
+######  Q6  #######
+    st.title('Should students abstain from alcohol in order to do better in school?')
+    question_6 = pd.DataFrame(queries.Q6)
+    Q6_chart = px.bar(question_6, x='Final_Grade', y='Alcohol_Consumption')
+    st.plotly_chart(Q6_chart)
 
 def team():    
     # Placeholder images (replace these with actual image paths or URLs)

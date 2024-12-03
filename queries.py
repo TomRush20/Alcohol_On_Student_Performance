@@ -48,4 +48,13 @@ GROUP BY
 """
 Q8 = sqlite_to_dataframe(Q8)
 
-
+# Should students abstain from alcohol in order to do better in school?
+Q6 = """
+SELECT SUM((student.workday_alcohol + student.weekend_alcohol)) AS Alcohol_Consumption, grades.final_grade AS Final_Grade
+FROM student
+INNER JOIN grades 
+ON student.student_id = grades.student_id
+GROUP BY grades.final_grade
+ORDER BY grades.final_grade ASC;
+"""
+Q6 = sqlite_to_dataframe(Q6)
