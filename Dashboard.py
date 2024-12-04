@@ -75,6 +75,19 @@ def analysis():
     Q1_chart = px.line(question_1, x='Final Grade', y='Average Workday Consumption')
     st.plotly_chart(Q1_chart)
 
+######  Q3  #######
+    st.title('Does studying less or drinking more have more of an effect on academic performance?')
+    
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        st.write("**REGRESSION MODEL**")
+        q3_df = pd.read_excel('Regression Model Data Management.xlsx')
+        st.dataframe(q3_df)
+    with col2:
+        st.divider()
+        st.write("Based on the coefficients, studying less has a bigger effect on academic performance")
+
 ######  Q8  #######
     st.title('How does alcohol consumption vary among genders?')
     #st.dataframe(queries.Q8, hide_index=True)
