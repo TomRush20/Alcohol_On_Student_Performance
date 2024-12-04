@@ -54,26 +54,30 @@ def data():
     
 
 def analysis():
-    st.title('Study Time vs Going Out Relationship')
-    # Reshape the DataFrame to a long format
-    figplt = queries.byGrade.melt(id_vars="Final Grade", var_name="Ranking Type", value_name="Average")
+    analysis_icon = 'https://www.iconpacks.net/icons/1/free-analysis-icon-691-thumb.png'
+    analysis_header = f"""
+        <div style="display: flex; align-items: center; justify-content: center;">
+            <img src="{analysis_icon}" alt="Logo" style="width: 100px; margin-right: 20px;">
+            <h1 style="flex-grow: 1; text-align: center;">Analysis</h1>
+        </div>
+    """
+    st.markdown(analysis_header, unsafe_allow_html=True)
 
-    # Create a grouped bar chart
-    fig = px.bar(
-        figplt,
-        x="Final Grade",
-        y="Average",
-        color="Ranking Type",
-        barmode="group",
-        title="Average Study and Party Ranking by Final Grade",
-        labels={"final_grade": "Final Grade", "Average": "Average Ranking"}
-    )
-    st.plotly_chart(fig)
 ######  Q1  #######
     st.title('Does alcohol consumption affect student performance?')
     question_1 = pd.DataFrame(queries.Q1)
     Q1_chart = px.line(question_1, x='Final Grade', y='Average Workday Consumption', title='Average Workday Consumption by Final Grade')
     st.plotly_chart(Q1_chart)
+    st.divider()
+    
+######  Q2  #######
+    st.title('Is alcohol consumption a significant predictor of academic performance?')
+    st.subheader('Stepwise Linear Regression Model')
+    st.write('After the including the selected features in the model, we added the three "drinking variables" to see how they compared to significant variables.')
+    q2_df = pd.read_excel('q2.xlsx')
+    st.dataframe(q2_df)
+    st.caption('The only "drinking variable" that was shown to be significant is the Going Out variable. This model would predict that students who go out often tend to do worse on their Final Exam.')
+    st.divider()
 
 ######  Q3  #######
     st.title('Does studying less or drinking more have more of an effect on academic performance?')
@@ -87,6 +91,14 @@ def analysis():
     with col2:
         st.divider()
         st.write("Based on the coefficients, studying less has a bigger effect on academic performance")
+    st.divider()
+
+######  Q6  #######
+    st.title('Should students abstain from alcohol in order to do better in school?')
+    question_6 = pd.DataFrame(queries.Q6)
+    Q6_chart = px.bar(question_6, x='Final_Grade', y='Alcohol_Consumption', title='Alcohol Consumption by Final Grade')
+    st.plotly_chart(Q6_chart)
+    st.divider()
 
 ######  Q8  #######
     st.title('How does alcohol consumption vary among genders?')
@@ -103,23 +115,25 @@ def analysis():
         labels={"Gender": "Gender", "Average Consumption": "Average Consumption Ranking (1-5)"}
     )
     st.plotly_chart(fig)
-
+    st.divider()
 
 ######  Q9  #######
+    st.title('Study Time vs Going Out Relationship')
+    # Reshape the DataFrame to a long format
+    figplt = queries.byGrade.melt(id_vars="Final Grade", var_name="Ranking Type", value_name="Average")
 
-######  Q6  #######
-    st.title('Should students abstain from alcohol in order to do better in school?')
-    question_6 = pd.DataFrame(queries.Q6)
-    Q6_chart = px.bar(question_6, x='Final_Grade', y='Alcohol_Consumption', title='Alcohol Consumption by Final Grade')
-    st.plotly_chart(Q6_chart)
-
-######  Q2  #######
-    st.title('Is alcohol consumption a significant predictor of academic performance?')
-    st.subheader('Stepwise Linear Regression Model')
-    st.write('After the including the selected features in the model, we added the three "drinking variables" to see how they compared to significant variables.')
-    q2_df = pd.read_excel('q2.xlsx')
-    st.dataframe(q2_df)
-    st.caption('The only "drinking variable" that was shown to be significant is the Going Out variable. This model would predict that students who go out often tend to do worse on their Final Exam.')
+    # Create a grouped bar chart
+    fig = px.bar(
+        figplt,
+        x="Final Grade",
+        y="Average",
+        color="Ranking Type",
+        barmode="group",
+        title="Average Study and Party Ranking by Final Grade",
+        labels={"final_grade": "Final Grade", "Average": "Average Ranking"}
+    )
+    st.plotly_chart(fig)
+    st.divider()
 
 def team():    
     # Placeholder images (replace these with actual image paths or URLs)
