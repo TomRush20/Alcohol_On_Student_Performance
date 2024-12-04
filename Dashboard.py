@@ -144,7 +144,6 @@ def analysis():
     # Reshape the DataFrame to a long format
     figplt = queries.byGrade.melt(id_vars="Final Grade", var_name="Ranking Type", value_name="Average")
 
-<<<<<<< Updated upstream
     # Create a grouped bar chart
     fig = px.bar(
         figplt,
@@ -157,7 +156,6 @@ def analysis():
     )
     st.plotly_chart(fig)
     st.divider()
-=======
 ######  Q6  #######
     st.title('Should students abstain from alcohol in order to do better in school?')
     question_6 = pd.DataFrame(queries.Q6)
@@ -171,7 +169,6 @@ def analysis():
     q2_df = pd.read_excel('q2.xlsx')
     st.dataframe(q2_df)
     st.caption('The only "drinking variable" that was shown to be significant is the Going Out variable. This model would predict that students who go out often tend to do worse on their Final Exam.')
->>>>>>> Stashed changes
 
 ######  Q5  #######
     st.title('What affects academic performance the most')
