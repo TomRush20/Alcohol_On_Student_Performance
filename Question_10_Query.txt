@@ -11,3 +11,10 @@ GROUP BY
 	grades.final_grade
 ORDER BY
 	student.workday_alcohol;
+
+
+
+add_in = {0: [4, 4, 5, 5], 1: ['A+', 'A', 'A+', 'B'], 2: [0, 0, 0, 0]}
+add_in = pd.DataFrame(add_in)
+
+final = pd.concat([results, add_in], axis=0)
