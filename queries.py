@@ -108,6 +108,20 @@ ORDER BY grades.final_grade ASC;
 """
 Q6 = sqlite_to_dataframe(Q6)
 
+# Does being in a relationship affect drinking habits?
+
+Q7 = """
+SELECT 
+    workday_alcohol,
+    currently_dating,
+    COUNT(*) AS count,
+    CONCAT(ROUND((COUNT(*) * 100.0 / SUM(COUNT(*)) OVER (PARTITION BY currently_dating)),1), "%") AS percent_of_total
+FROM student
+GROUP BY workday_alcohol, currently_dating;
+"""
+Q7 = sqlite_to_dataframe(Q7)
+
+
 
 Q10 = """
 SELECT

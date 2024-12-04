@@ -119,6 +119,15 @@ def analysis():
     st.caption("Students would do better in school if they abstain from alchol. However, there are a good amount of students who drink and get good grades, so abstaining could be too drastic.")
     st.divider()
 
+######  Q7  #######
+    st.title('Does being in a relationship affect drinking habits')
+    question_7 = pd.DataFrame(queries.Q7)
+    #Q7_chart = px.bar(question_7, x='Final_Grade', y='Alcohol_Consumption', title='Alcohol Consumption by Final Grade')
+    #st.plotly_chart(Q7_chart)
+    st.caption("Students would do better in school if they abstain from alchol. However, there are a good amount of students who drink and get good grades, so abstaining could be too drastic.")
+    st.divider()
+
+
 ######  Q8  #######
     st.title('How does alcohol consumption vary among genders?')
     #st.dataframe(queries.Q8, hide_index=True)
