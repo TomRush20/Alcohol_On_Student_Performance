@@ -156,11 +156,6 @@ def analysis():
     )
     st.plotly_chart(fig)
     st.divider()
-######  Q6  #######
-    st.title('Should students abstain from alcohol in order to do better in school?')
-    question_6 = pd.DataFrame(queries.Q6)
-    Q6_chart = px.bar(question_6, x='Final_Grade', y='Alcohol_Consumption', title='Alcohol Consumption by Final Grade')
-    st.plotly_chart(Q6_chart)
 
 ######  Q2  #######
     st.title('Is alcohol consumption a significant predictor of academic performance?')
@@ -179,6 +174,15 @@ def analysis():
     if choice == 'Top 5':
         q5_df_5 = q5_df[q5_df['Abs']>=0.6109]
         st.bar_chart(q5_df_5, x = 'Variable', y = 'Coefficient', color='Coefficient')
+
+######  Q10  #######
+    st.title('10. Do students who only drink on weekends tend to perform better in school?')
+    question_10 = pd.DataFrame(queries.Q10)
+    add_in = {'workday_alcohol': [4, 4, 5, 5], 'final_grade': ['A+', 'A', 'A+', 'B'], 'final_grade_count': [0, 0, 0, 0]}
+    add_in = pd.DataFrame(add_in)
+
+    final = pd.concat([question_10, add_in], axis=0)
+    st.dataframe(final)
 
 def team():    
     # Placeholder images (replace these with actual image paths or URLs)

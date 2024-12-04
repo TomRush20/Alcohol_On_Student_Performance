@@ -75,3 +75,21 @@ GROUP BY grades.final_grade
 ORDER BY grades.final_grade ASC;
 """
 Q6 = sqlite_to_dataframe(Q6)
+
+
+Q10 = """
+SELECT
+	student.workday_alcohoL,
+	grades.final_grade,
+	COUNT(final_grade) AS final_grade_count
+FROM
+	student
+INNER JOIN grades
+		USING(student_id)
+GROUP BY
+	student.workday_alcohol,
+	grades.final_grade
+ORDER BY
+	student.workday_alcohol;
+"""
+Q10 = sqlite_to_dataframe(Q10)

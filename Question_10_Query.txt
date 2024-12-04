@@ -1,0 +1,13 @@
+SELECT
+	student.workday_alcohoL,
+	grades.final_grade,
+	COUNT(final_grade) AS final_grade_count
+FROM
+	student
+INNER JOIN grades
+		USING(student_id)
+GROUP BY
+	student.workday_alcohol,
+	grades.final_grade
+ORDER BY
+	student.workday_alcohol;
