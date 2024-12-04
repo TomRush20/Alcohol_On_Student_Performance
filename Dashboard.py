@@ -156,6 +156,7 @@ def analysis():
     )
     st.plotly_chart(fig)
     st.divider()
+<<<<<<< Updated upstream
 
 ######  Q2  #######
     st.title('Is alcohol consumption a significant predictor of academic performance?')
@@ -164,9 +165,12 @@ def analysis():
     q2_df = pd.read_excel('q2.xlsx')
     st.dataframe(q2_df)
     st.caption('The only "drinking variable" that was shown to be significant is the Going Out variable. This model would predict that students who go out often tend to do worse on their Final Exam.')
+=======
+>>>>>>> Stashed changes
 
 ######  Q5  #######
     st.title('What affects academic performance the most')
+    st.subheader('Coefficients from Full Regression Model')
     q5_df = pd.read_excel('q5.xlsx')
     choice = st.pills('Choose an Option', options=['All']+['Top 5'])
     if choice == 'All':
@@ -174,6 +178,7 @@ def analysis():
     if choice == 'Top 5':
         q5_df_5 = q5_df[q5_df['Abs']>=0.6109]
         st.bar_chart(q5_df_5, x = 'Variable', y = 'Coefficient', color='Coefficient')
+    st.caption('Looking at the Top 5 variables in terms of coefficient magnitude, the most important variable was fittingly past failures. If a student has a past history of failing classes, it makes sense that he/she would fail in the current class. An interesting variable that was found to be important was Relationship Status, which was shown to hinder academic performance.')
 
 ######  Q10  #######
     st.title('10. Do students who only drink on weekends tend to perform better in school?')
