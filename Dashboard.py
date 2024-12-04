@@ -144,6 +144,7 @@ def analysis():
     # Reshape the DataFrame to a long format
     figplt = queries.byGrade.melt(id_vars="Final Grade", var_name="Ranking Type", value_name="Average")
 
+<<<<<<< Updated upstream
     # Create a grouped bar chart
     fig = px.bar(
         figplt,
@@ -156,6 +157,31 @@ def analysis():
     )
     st.plotly_chart(fig)
     st.divider()
+=======
+######  Q6  #######
+    st.title('Should students abstain from alcohol in order to do better in school?')
+    question_6 = pd.DataFrame(queries.Q6)
+    Q6_chart = px.bar(question_6, x='Final_Grade', y='Alcohol_Consumption', title='Alcohol Consumption by Final Grade')
+    st.plotly_chart(Q6_chart)
+
+######  Q2  #######
+    st.title('Is alcohol consumption a significant predictor of academic performance?')
+    st.subheader('Stepwise Linear Regression Model')
+    st.write('After adding the selected features in the model, we added the three "drinking variables" to see how they compared to significant variables.')
+    q2_df = pd.read_excel('q2.xlsx')
+    st.dataframe(q2_df)
+    st.caption('The only "drinking variable" that was shown to be significant is the Going Out variable. This model would predict that students who go out often tend to do worse on their Final Exam.')
+>>>>>>> Stashed changes
+
+######  Q5  #######
+    st.title('What affects academic performance the most')
+    q5_df = pd.read_excel('q5.xlsx')
+    choice = st.pills('Choose an Option', options=['All']+['Top 5'])
+    if choice == 'All':
+        st.bar_chart(q5_df, x = 'Variable', y = 'Coefficient', color='Coefficient')
+    if choice == 'Top 5':
+        q5_df_5 = q5_df[q5_df['Abs']>=0.6109]
+        st.bar_chart(q5_df_5, x = 'Variable', y = 'Coefficient', color='Coefficient')
 
 def team():    
     # Placeholder images (replace these with actual image paths or URLs)
