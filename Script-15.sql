@@ -13,65 +13,30 @@ GROUP BY
 order BY 
 	"Average Workday Consumption" DESC;
 
--- How does alcohol consumption affect academic performance by Weekend
+-- Overview
 SELECT 
-	g.final_grade,
-	AVG(s.weekend_alcohol) as "Average Weekend Consumption" 
+	s.student_id ,
+	s.sex ,
+	s.age ,
+	s.parent_status ,
+	s.study_time ,
+	s.failures ,
+	s.activities ,
+	s.higher_edu ,
+	s.family_relationship ,
+	s.free_time ,
+	s.go_out ,
+	s.workday_alcohol ,
+	s.weekend_alcohol ,
+	s.health_status ,
+	s.absences ,
+	s.currently_dating ,
+	s.tutored ,
+	g.s1_grade ,
+	g.s2_grade ,
+	g.final_grade 
 FROM
 	student s
-join
+JOIN
 	grades g
-on
-	s.student_id = g.student_id 
-GROUP BY
-	g.final_grade
-order BY 
-	"Average Weekend Consumption" DESC;
-	
--- Does Studying less or drinking more have a more affect on academic performance
-SELECT 
-	AVG(s.study_time) as "Average Study Time" , -- numeric: 1 - <2 hours, 2 - 2 to 5 hours, 3 - 5 to 10 hours, or 4 - >10 hours
-	g.final_grade
-FROM
-	student s
-join
-	grades g
-on
-	s.student_id = g.student_id 
-GROUP BY
-	g.final_grade
-order BY 
-	"Average Study Time" DESC;
-
-SELECT 
-	(AVG(s.weekend_alcohol) + AVG(s.workday_alcohol)) / 2 as "Average Alcohol Consumption Week" ,
-	g.final_grade
-FROM
-	student s
-join
-	grades g
-on
-	s.student_id = g.student_id 
-GROUP BY
-	g.final_grade
-order BY 
-	"Average Alcohol Consumption Week" DESC;
-
-SELECT 
-	(AVG(s.weekend_alcohol) + AVG(s.workday_alcohol)) / 2 as "Average Alcohol Consumption Week" ,
-	AVG(s.study_time) as "Average Study Time" ,
-	g.final_grade ,
-	CASE 
-		WHEN "Average Alcohol Consumption Week" > AVG(s.study_time)
-			THEN "Drinking More Effect"
-		ELSE
-			"Studying More Effect"
-	END as "More Effect"
-FROM
-	student s
-join
-	grades g
-on
-	s.student_id = g.student_id 
-GROUP BY
-	g.final_grade;
+ON s.student_id = g.student_id ;

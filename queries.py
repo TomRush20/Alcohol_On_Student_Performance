@@ -34,11 +34,43 @@ ORDER BY round(AVG(study_time),2) DESC
 """
 byGrade = sqlite_to_dataframe(byGrade)
 
+#Data Overview
+overview_sql = """
+SELECT 
+	s.student_id ,
+	s.sex ,
+	s.age ,
+	s.parent_status ,
+	s.study_time ,
+	s.failures ,
+	s.activities ,
+	s.higher_edu ,
+	s.family_relationship ,
+	s.free_time ,
+	s.go_out ,
+	s.workday_alcohol ,
+	s.weekend_alcohol ,
+	s.health_status ,
+	s.absences ,
+	s.currently_dating ,
+	s.tutored ,
+	g.s1_grade ,
+	g.s2_grade ,
+	g.final_grade 
+FROM
+	student s
+JOIN
+	grades g
+ON s.student_id = g.student_id ;
+"""
+
+overview_sql = sqlite_to_dataframe(overview_sql)
+
 #Does alcohol consumption affect student performance?
 Q1 = """
 SELECT 
 	g.final_grade as "Final Grade",
-	AVG(s.workday_alcohol) as "Average Workday Consumption"  
+	AVG(s.workday_alcohol) as "Average Daily Consumption"  
 FROM
 	student s
 join
@@ -48,7 +80,7 @@ on
 GROUP BY
 	g.final_grade
 order BY 
-	"Average Workday Consumption" DESC;
+	"Average Daily Consumption" DESC;
 """
 Q1 = sqlite_to_dataframe(Q1)
 

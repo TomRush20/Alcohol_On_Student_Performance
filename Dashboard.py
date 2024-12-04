@@ -51,20 +51,20 @@ def home():
 
 def data():
     st.title('Data Overview')
-    #overview_df = pd.read_excel('Data_Dictionary.xlsx')
-    #st.dataframe(overview_df, use_container_width=True)
+    overview_df = pd.DataFrame(queries.overview_sql)
+    st.dataframe(overview_df, use_container_width=True)
     st.divider()
     
     st.markdown("### Key Metrics")
     
     col1, col2 = st.columns(2)
-    """
+    
     with col1:
         st.metric("Total Records", overview_df.shape[0])
     
     with col2:
         st.metric("Total Columns", overview_df.shape[1])
-    """
+    
     st.divider()
 
     #Data Dictionary
@@ -88,8 +88,9 @@ def analysis():
 ######  Q1  #######
     st.title('Does alcohol consumption affect student performance?')
     question_1 = pd.DataFrame(queries.Q1)
-    Q1_chart = px.line(question_1, x='Final Grade', y='Average Workday Consumption', title='Average Workday Consumption by Final Grade')
+    Q1_chart = px.line(question_1, x='Final Grade', y='Average Daily Consumption', title='Average Daily Consumption by Final Grade')
     st.plotly_chart(Q1_chart)
+    st.caption("The graph shows a clear inverse relationship between daily alcohol consumption and final grade. Alcohol does affect student performance; in a negative way. ")
     st.divider()
     
 ######  Q2  #######
@@ -104,15 +105,10 @@ def analysis():
 ######  Q3  #######
     st.title('Does studying less or drinking more have more of an effect on academic performance?')
     
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        st.write("**REGRESSION MODEL**")
-        q3_df = pd.read_excel('Regression Model Data Management.xlsx')
-        st.dataframe(q3_df)
-    with col2:
-        st.divider()
-        st.write("Based on the coefficients, studying less has a bigger effect on academic performance")
+    st.write("**REGRESSION MODEL**")
+    q3_df = pd.read_excel('Regression Model Data Management.xlsx')
+    st.dataframe(q3_df)
+    st.caption("Based on the coefficients, studying less has a bigger effect on academic performance. The bigger coefficient indicates a bigger impact on Final Grade")
     st.divider()
 
 ######  Q6  #######
@@ -120,6 +116,7 @@ def analysis():
     question_6 = pd.DataFrame(queries.Q6)
     Q6_chart = px.bar(question_6, x='Final_Grade', y='Alcohol_Consumption', title='Alcohol Consumption by Final Grade')
     st.plotly_chart(Q6_chart)
+    st.caption("Students would do better in school if they abstain from alchol. However, there are a good amount of students who drink and get good grades, so abstaining could be too drastic.")
     st.divider()
 
 ######  Q8  #######
@@ -137,12 +134,14 @@ def analysis():
         labels={"Gender": "Gender", "Average Consumption": "Average Consumption Ranking (1-5)"}
     )
     st.plotly_chart(fig)
+    st.caption("Males are on average drinking more alcohol than females. Males drink more on workdays and weekends. Males drink about the same during workdays than females do during weekends.")
     st.divider()
 
 ######  Q9  #######
     st.title('Study Time vs Going Out Relationship')
     # Reshape the DataFrame to a long format
     figplt = queries.byGrade.melt(id_vars="Final Grade", var_name="Ranking Type", value_name="Average")
+
 
     # Create a grouped bar chart
     fig = px.bar(
@@ -155,6 +154,8 @@ def analysis():
         labels={"final_grade": "Final Grade", "Average": "Average Ranking"}
     )
     st.plotly_chart(fig)
+    
+    st.caption("Going out to parties and study time has an inverse relationship. The more parties students go to, the less time they spend studying. Students who do well tend to spend more time styding and less time going to parties. ")
     st.divider()
 
 ######  Q5  #######
@@ -258,5 +259,3 @@ if selected == "Analysis":
     analysis()
 if selected == "Meet the Team":
     team()
-
-print("hello")
