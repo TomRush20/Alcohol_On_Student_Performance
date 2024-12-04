@@ -179,15 +179,6 @@ def analysis():
         st.bar_chart(q5_df_5, x = 'Variable', y = 'Coefficient', color='Coefficient')
     st.caption('Looking at the Top 5 variables in terms of coefficient magnitude, the most important variable was fittingly past failures. If a student has a past history of failing classes, it makes sense that he/she would fail in the current class. An interesting variable that was found to be important was Relationship Status, which was shown to hinder academic performance.')
 
-######  Q10  #######
-    st.title('10. Do students who only drink on weekends tend to perform better in school?')
-    question_10 = pd.DataFrame(queries.Q10)
-    add_in = {'workday_alcohol': [4, 4, 5, 5], 'final_grade': ['A+', 'A', 'A+', 'B'], 'final_grade_count': [0, 0, 0, 0]}
-    add_in = pd.DataFrame(add_in)
-
-    final = pd.concat([question_10, add_in], axis=0)
-    st.dataframe(final)
-
 def team():    
     # Placeholder images (replace these with actual image paths or URLs)
     charlie = "https://pbs.twimg.com/profile_images/1308737414622523392/0sp7hZnl_400x400.jpg"
