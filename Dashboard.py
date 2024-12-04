@@ -113,6 +113,14 @@ def analysis():
     Q6_chart = px.bar(question_6, x='Final_Grade', y='Alcohol_Consumption', title='Alcohol Consumption by Final Grade')
     st.plotly_chart(Q6_chart)
 
+######  Q2  #######
+    st.title('Is alcohol consumption a significant predictor of academic performance?')
+    st.subheader('Stepwise Linear Regression Model')
+    st.write('After the including the selected features in the model, we added the three "drinking variables" to see how they compared to significant variables.')
+    q2_df = pd.read_excel('q2.xlsx')
+    st.dataframe(q2_df)
+    st.caption('The only "drinking variable" that was shown to be significant is the Going Out variable. This model would predict that students who go out often tend to do worse on their Final Exam.')
+
 def team():    
     # Placeholder images (replace these with actual image paths or URLs)
     charlie = "https://pbs.twimg.com/profile_images/1308737414622523392/0sp7hZnl_400x400.jpg"
