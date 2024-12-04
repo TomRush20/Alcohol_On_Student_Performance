@@ -156,17 +156,6 @@ def analysis():
     )
     st.plotly_chart(fig)
     st.divider()
-<<<<<<< Updated upstream
-
-######  Q2  #######
-    st.title('Is alcohol consumption a significant predictor of academic performance?')
-    st.subheader('Stepwise Linear Regression Model')
-    st.write('After adding the selected features in the model, we added the three "drinking variables" to see how they compared to significant variables.')
-    q2_df = pd.read_excel('q2.xlsx')
-    st.dataframe(q2_df)
-    st.caption('The only "drinking variable" that was shown to be significant is the Going Out variable. This model would predict that students who go out often tend to do worse on their Final Exam.')
-=======
->>>>>>> Stashed changes
 
 ######  Q5  #######
     st.title('What affects academic performance the most')
