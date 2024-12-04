@@ -72,7 +72,7 @@ def analysis():
 ######  Q1  #######
     st.title('Does alcohol consumption affect student performance?')
     question_1 = pd.DataFrame(queries.Q1)
-    Q1_chart = px.line(question_1, x='Final Grade', y='Average Workday Consumption')
+    Q1_chart = px.line(question_1, x='Final Grade', y='Average Workday Consumption', title='Average Workday Consumption by Final Grade')
     st.plotly_chart(Q1_chart)
 
 ######  Q8  #######
@@ -97,7 +97,7 @@ def analysis():
 ######  Q6  #######
     st.title('Should students abstain from alcohol in order to do better in school?')
     question_6 = pd.DataFrame(queries.Q6)
-    Q6_chart = px.bar(question_6, x='Final_Grade', y='Alcohol_Consumption')
+    Q6_chart = px.bar(question_6, x='Final_Grade', y='Alcohol_Consumption', title='Alcohol Consumption by Final Grade')
     st.plotly_chart(Q6_chart)
 
 def team():    
