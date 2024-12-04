@@ -51,7 +51,29 @@ def home():
 
 def data():
     st.title('Data Overview')
+    #overview_df = pd.read_excel('Data_Dictionary.xlsx')
+    #st.dataframe(overview_df, use_container_width=True)
+    st.divider()
     
+    st.markdown("### Key Metrics")
+    
+    col1, col2 = st.columns(2)
+    """
+    with col1:
+        st.metric("Total Records", overview_df.shape[0])
+    
+    with col2:
+        st.metric("Total Columns", overview_df.shape[1])
+    """
+    st.divider()
+
+    #Data Dictionary
+    st.markdown("### Data Dictionary")
+    
+    data_df = pd.read_excel('Data_Dictionary.xlsx')
+    data_options = st.multiselect("Select Attribute",data_df["Attribute"])
+    selected_attribute = data_df[data_df["Attribute"].isin(data_options)]
+    st.dataframe(selected_attribute, use_container_width=True)
 
 def analysis():
     analysis_icon = 'https://www.iconpacks.net/icons/1/free-analysis-icon-691-thumb.png'
