@@ -18,7 +18,11 @@ import requests
 import queries
 
 
-st.set_page_config(layout='wide',initial_sidebar_state="collapsed")
+st.set_page_config(layout='wide',
+                    initial_sidebar_state="collapsed",
+                    page_title="Student Alcohol Consumption Dashboard",
+                    page_icon="🍺"
+                   )
 
 # Add a logo in the top left corner
 title_url = 'https://cdn-icons-png.freepik.com/256/2734/2734166.png?semt=ais_hybrid'
@@ -168,7 +172,7 @@ def analysis():
     with st.expander("Do students in relationships tend to drink more?"):
         st.title('Do students in relationships tend to drink more?')
         q7_df = pd.DataFrame(queries.Q7)
-        q7_df["Percent of Total"] = q7_df["Percent of Total"].str.rstrip("%").astype(float)
+        #q7_df["Percent of Total"] = q7_df["Percent of Total"].str.rstrip("%").astype(float)
         # Create the stacked bar chart
         fig = px.bar(
             q7_df,
@@ -200,7 +204,6 @@ def analysis():
 ######  Q8  #######
     with st.expander("How does alcohol consumption vary among genders?"):
         st.title('How does alcohol consumption vary among genders?')
-        #st.dataframe(queries.Q8, hide_index=True)
         Q8_plot = queries.Q8.melt(id_vars="Gender", var_name="Consumption Type", value_name="Average Consumption")
         # Create a bar chart using Plotly Express
         fig = px.bar(

@@ -115,7 +115,7 @@ SELECT
     workday_alcohol AS "Workday Alcohol Consumption",
     currently_dating AS "Currently Dating",
     COUNT(*) AS "Count of Students",
-    ROUND((COUNT(*) * 100.0 / SUM(COUNT(*)) OVER (PARTITION BY currently_dating)), 1) || '%' AS "Percent of Total"
+    ROUND((COUNT(*) * 100.0 / SUM(COUNT(*)) OVER (PARTITION BY currently_dating)), 1) AS "Percent of Total"
 FROM student
 GROUP BY workday_alcohol, currently_dating;
 """
