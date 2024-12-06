@@ -148,7 +148,7 @@ def analysis():
         st.title('What influences academic performance the most?')
         st.subheader('Coefficients from Full Regression Model')
         q5_df = pd.read_excel('q5.xlsx')
-        choice = st.pills('Choose an Option', options=['All']+['Top 5'])
+        choice = st.pills('Choose an Option', options=['All']+['Top 5'], default='All')
         if choice == 'All':
             st.bar_chart(q5_df, x = 'Variable', y = 'Coefficient', color='Coefficient', horizontal=True)
         if choice == 'Top 5':
@@ -245,7 +245,7 @@ def team():
     """
     st.markdown(team_header, unsafe_allow_html=True)
     st.write('')
-    st.write("### Get to know the people behind the magic!")
+    st.write("### Get to know the people behind the data!")
     st.write('')
 
     def beer():
