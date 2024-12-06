@@ -112,10 +112,10 @@ Q6 = sqlite_to_dataframe(Q6)
 
 Q7 = """
 SELECT 
-    workday_alcohol,
-    currently_dating,
-    COUNT(*) AS count,
-    CONCAT(ROUND((COUNT(*) * 100.0 / SUM(COUNT(*)) OVER (PARTITION BY currently_dating)),1), "%") AS percent_of_total
+    workday_alcohol AS "Workday Alcohol Consumption",
+    currently_dating AS "Currently Dating",
+    COUNT(*) AS "Count of Students",
+    ROUND((COUNT(*) * 100.0 / SUM(COUNT(*)) OVER (PARTITION BY currently_dating)), 1) || '%' AS "Percent of Total"
 FROM student
 GROUP BY workday_alcohol, currently_dating;
 """
