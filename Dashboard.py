@@ -152,7 +152,8 @@ def data():
             filtered_df = filtered_df[filtered_df[custom_field].isin([custom_value_upper, custom_value_lower])]
 
     # Display filtered dataframe
-    st.dataframe(filtered_df, use_container_width=True)
+    st.dataframe(filtered_df, use_container_width=True,
+                 column_config={"average_alcohol_consumption": None})
     st.divider()
     
     st.markdown("### Key Metrics")
