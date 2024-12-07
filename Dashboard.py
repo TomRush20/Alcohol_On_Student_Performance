@@ -82,7 +82,77 @@ def data():
     st.write('')
 
     overview_df = pd.DataFrame(queries.overview_sql)
-    st.dataframe(overview_df, use_container_width=True)
+    # Initialize session state for filters
+    if "filters" not in st.session_state:
+        st.session_state.filters = {"sex": "All", "grade": "All", "alcohol":"All", "custom_field": None, "custom_value": None}
+
+    # Sidebar for filters
+    col1, col2 = st.columns(2, gap="large")
+
+    with col2:
+        # Gender filter
+        sex_options = ["All", "Male", "Female"]
+        selected_sex = st.segmented_control("Filter by Sex", sex_options, default=st.session_state.filters["sex"])
+        st.session_state.filters["sex"] = selected_sex
+
+        # Grade filter
+        grade_options = ["All", "A+", "A", "B", "C", "F"]
+        selected_grade = st.segmented_control("Filter by Grade", grade_options, default=st.session_state.filters["grade"])
+        st.session_state.filters["grade"] = selected_grade
+
+        # alcohol consumption filter
+        alcohol_options = ["All", "Low", "Moderate", "High"]
+        selected_alcohol = st.segmented_control("Filter by Alcohol Consumption", alcohol_options, default=st.session_state.filters["alcohol"])
+        st.session_state.filters["alcohol"] = selected_alcohol
+
+    with col1:
+        with st.container(border=True):
+            # Custom filter
+            filter_field = st.selectbox("Select the field you would like to filter", options=overview_df.columns, placeholder="Select Field", index=None)
+            filter_value = st.text_input("Specify a value to filter by", placeholder="Enter Value")
+            if st.button("Apply Filter"):
+                st.session_state.filters["custom_field"] = filter_field
+                st.session_state.filters["custom_value"] = filter_value
+
+    # Apply all filters
+    filtered_df = overview_df.copy()
+
+    # Apply sex filter
+    if st.session_state.filters["sex"] != "All":
+        if st.session_state.filters["sex"] == "Male":
+            filtered_df = filtered_df[filtered_df["sex"] == "M"]
+        else:
+            filtered_df = filtered_df[filtered_df["sex"] == "F"]
+
+    # Apply grade filter
+    if st.session_state.filters["grade"] != "All":
+        filtered_df = filtered_df[filtered_df["final_grade"] == st.session_state.filters["grade"]]
+
+    # Apply alcohol consumption filter
+    filtered_df["average_alcohol_consumption"] = filtered_df[['workday_alcohol', 'weekend_alcohol']].mean(axis=1)
+    if st.session_state.filters["alcohol"] != "All":
+        if st.session_state.filters["alcohol"] == "Low":
+            filtered_df = filtered_df[filtered_df["average_alcohol_consumption"] <= 2]
+        elif st.session_state.filters["alcohol"] == "Moderate":
+            filtered_df = filtered_df[(filtered_df["average_alcohol_consumption"] > 2) & (filtered_df["average_alcohol_consumption"] <= 4)]
+        else:
+            filtered_df = filtered_df[filtered_df["average_alcohol_consumption"] > 4]
+
+    # Apply custom filter
+    custom_field = st.session_state.filters["custom_field"]
+    custom_value = st.session_state.filters["custom_value"]
+
+    if custom_field and custom_value:
+        if custom_value.isnumeric():
+            custom_value = int(custom_value)
+            filtered_df = filtered_df[filtered_df[custom_field] == custom_value]
+        else:
+            custom_value_upper = custom_value.upper()
+            custom_value_lower = custom_value.lower()
+            filtered_df = filtered_df[filtered_df[custom_field].isin([custom_value_upper, custom_value_lower])]
+
+    # Display filtered dataframe
+    st.dataframe(filtered_df, use_container_width=True)
     st.divider()
     
     st.markdown("### Key Metrics")
