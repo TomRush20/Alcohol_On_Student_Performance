@@ -84,6 +84,179 @@ order BY
 """
 Q1 = sqlite_to_dataframe(Q1)
 
+#What are the common traits among the students who consume alcohol frequently during the week?
+
+Q4_1 = """
+SELECT sex AS "Trait",
+COUNT(*), ROUND(COUNT(*) * 100.0 / SUM(COUNT(*)) OVER(), 1) AS "Percent Of Total"
+FROM student 
+WHERE workday_alcohol IN (4,5)
+GROUP BY sex
+ORDER BY ROUND(COUNT(*) * 100.0 / SUM(COUNT(*)) OVER(), 1) DESC
+LIMIT 1;
+"""
+Q4_1 = sqlite_to_dataframe(Q4_1)
+
+Q4_2 = """
+SELECT age AS "Trait",
+COUNT(*), ROUND(COUNT(*) * 100.0 / SUM(COUNT(*)) OVER(), 1) AS "Percent Of Total"
+FROM student 
+WHERE workday_alcohol IN (4,5)
+GROUP BY age
+ORDER BY ROUND(COUNT(*) * 100.0 / SUM(COUNT(*)) OVER(), 1) DESC
+LIMIT 1;
+"""
+Q4_2 = sqlite_to_dataframe(Q4_2)
+
+Q4_3 = """
+SELECT parent_status AS "Trait",
+COUNT(*), ROUND(COUNT(*) * 100.0 / SUM(COUNT(*)) OVER(), 1) AS "Percent Of Total"
+FROM student 
+WHERE workday_alcohol IN (4,5)
+GROUP BY parent_status 
+ORDER BY ROUND(COUNT(*) * 100.0 / SUM(COUNT(*)) OVER(), 1) DESC
+LIMIT 1;
+"""
+Q4_3 = sqlite_to_dataframe(Q4_3)
+
+Q4_4 = """
+SELECT study_time AS "Trait",
+COUNT(*), ROUND(COUNT(*) * 100.0 / SUM(COUNT(*)) OVER(), 1) AS "Percent Of Total"
+FROM student 
+WHERE workday_alcohol IN (4,5)
+GROUP BY study_time 
+ORDER BY ROUND(COUNT(*) * 100.0 / SUM(COUNT(*)) OVER(), 1) DESC
+LIMIT 1;
+"""
+Q4_4 = sqlite_to_dataframe(Q4_4)
+
+Q4_5 = """
+SELECT failures AS "Trait",
+COUNT(*), ROUND(COUNT(*) * 100.0 / SUM(COUNT(*)) OVER(), 1) AS "Percent Of Total"
+FROM student 
+WHERE workday_alcohol IN (4,5)
+GROUP BY failures
+ORDER BY ROUND(COUNT(*) * 100.0 / SUM(COUNT(*)) OVER(), 1) DESC
+LIMIT 1;
+"""
+Q4_5 = sqlite_to_dataframe(Q4_5)
+
+Q4_6 = """
+SELECT activities AS "Trait",
+COUNT(*), ROUND(COUNT(*) * 100.0 / SUM(COUNT(*)) OVER(), 1) AS "Percent Of Total"
+FROM student 
+WHERE workday_alcohol IN (4,5)
+GROUP BY activities
+ORDER BY ROUND(COUNT(*) * 100.0 / SUM(COUNT(*)) OVER(), 1) DESC
+LIMIT 1;
+"""
+Q4_6 = sqlite_to_dataframe(Q4_6)
+
+Q4_7 = """
+SELECT higher_edu AS "Trait",
+COUNT(*), ROUND(COUNT(*) * 100.0 / SUM(COUNT(*)) OVER(), 1) AS "Percent Of Total"
+FROM student 
+WHERE workday_alcohol IN (4,5)
+GROUP BY higher_edu 
+ORDER BY ROUND(COUNT(*) * 100.0 / SUM(COUNT(*)) OVER(), 1) DESC
+LIMIT 1;
+"""
+Q4_7 = sqlite_to_dataframe(Q4_7)
+
+Q4_8 = """
+SELECT family_relationship AS "Trait",
+COUNT(*), ROUND(COUNT(*) * 100.0 / SUM(COUNT(*)) OVER(), 1) AS "Percent Of Total"
+FROM student 
+WHERE workday_alcohol IN (4,5)
+GROUP BY family_relationship 
+ORDER BY ROUND(COUNT(*) * 100.0 / SUM(COUNT(*)) OVER(), 1) DESC
+LIMIT 1;
+"""
+Q4_8 = sqlite_to_dataframe(Q4_8)
+
+Q4_9 = """
+SELECT free_time AS "Trait",
+COUNT(*), ROUND(COUNT(*) * 100.0 / SUM(COUNT(*)) OVER(), 1) AS "Percent Of Total"
+FROM student 
+WHERE workday_alcohol IN (4,5)
+GROUP BY free_time
+ORDER BY ROUND(COUNT(*) * 100.0 / SUM(COUNT(*)) OVER(), 1) DESC
+LIMIT 1;
+"""
+Q4_9 = sqlite_to_dataframe(Q4_9)
+
+Q4_10 = """
+SELECT go_out AS "Trait",
+COUNT(*), ROUND(COUNT(*) * 100.0 / SUM(COUNT(*)) OVER(), 1) AS "Percent Of Total"
+FROM student 
+WHERE workday_alcohol IN (4,5)
+GROUP BY go_out
+ORDER BY ROUND(COUNT(*) * 100.0 / SUM(COUNT(*)) OVER(), 1) DESC
+LIMIT 1;
+"""
+Q4_10 = sqlite_to_dataframe(Q4_10)
+
+Q4_11 = """
+SELECT weekend_alcohol AS "Trait",
+COUNT(*), ROUND(COUNT(*) * 100.0 / SUM(COUNT(*)) OVER(), 1) AS "Percent Of Total"
+FROM student 
+WHERE workday_alcohol IN (4,5)
+GROUP BY weekend_alcohol
+ORDER BY ROUND(COUNT(*) * 100.0 / SUM(COUNT(*)) OVER(), 1) DESC
+LIMIT 1;
+"""
+Q4_11 = sqlite_to_dataframe(Q4_11)
+
+Q4_12 = """
+SELECT health_status AS "Trait",
+COUNT(*), ROUND(COUNT(*) * 100.0 / SUM(COUNT(*)) OVER(), 1) AS "Percent Of Total"
+FROM student 
+WHERE workday_alcohol IN (4,5)
+GROUP BY health_status
+ORDER BY ROUND(COUNT(*) * 100.0 / SUM(COUNT(*)) OVER(), 1) DESC
+LIMIT 1;
+"""
+Q4_12 = sqlite_to_dataframe(Q4_12)
+
+Q4_13 = """
+SELECT absences AS "Trait",
+COUNT(*), ROUND(COUNT(*) * 100.0 / SUM(COUNT(*)) OVER(), 1) AS "Percent Of Total"
+FROM student 
+WHERE workday_alcohol IN (4,5)
+GROUP BY absences
+ORDER BY ROUND(COUNT(*) * 100.0 / SUM(COUNT(*)) OVER(), 1) DESC
+LIMIT 1;
+"""
+Q4_13 = sqlite_to_dataframe(Q4_13)
+
+Q4_14 = """
+SELECT currently_dating AS "Trait",
+COUNT(*), ROUND(COUNT(*) * 100.0 / SUM(COUNT(*)) OVER(), 1) AS "Percent Of Total"
+FROM student 
+WHERE workday_alcohol IN (4,5)
+GROUP BY currently_dating 
+ORDER BY ROUND(COUNT(*) * 100.0 / SUM(COUNT(*)) OVER(), 1) DESC
+LIMIT 1;
+"""
+Q4_14 = sqlite_to_dataframe(Q4_14)
+
+Q4_15 = """
+SELECT tutored AS "Trait",
+COUNT(*), ROUND(COUNT(*) * 100.0 / SUM(COUNT(*)) OVER(), 1) AS "Percent Of Total"
+FROM student 
+WHERE workday_alcohol IN (4,5)
+GROUP BY tutored 
+ORDER BY ROUND(COUNT(*) * 100.0 / SUM(COUNT(*)) OVER(), 1) DESC
+LIMIT 1;
+"""
+Q4_15 = sqlite_to_dataframe(Q4_15)
+
+stacked_df = pd.concat([Q4_1, Q4_2, Q4_3, Q4_4, Q4_5, Q4_6, Q4_7, Q4_8, Q4_9, Q4_10, Q4_11, Q4_12, Q4_13, Q4_14, Q4_15], axis=0, ignore_index=True)
+stacked_df1 = stacked_df.drop(columns='COUNT(*)', inplace=False)
+stacked_df1["Category"] = ["Sex", "Age", "Parent Status", "Study Time", "Failures", "Activities", "Higher Education", "Family Relationship", "Free Time", "Go Out", "Weekend Alcohol", "Health Status", "Absenses", "Currently Dating", "Tutored"]
+print(stacked_df1)
+
+
 # How does alcohol consumption vary among genders?
 Q8 = """
 SELECT

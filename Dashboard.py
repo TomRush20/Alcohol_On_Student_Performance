@@ -60,7 +60,7 @@ def home():
     st.write('1. Does alcohol consumption affect student performance?')
     st.write('2. Is alcohol consumption a significant predictor of academic success?')
     st.write('3. Does study time or alcohol consumption have more of an impact on academic performance?')
-    st.write('4. What are the common traits among the students who consume alcohol frequently?')
+    st.write('4. What are the common traits among the students who consume alcohol frequently during the week?')
     st.write('5. What influences academic performance the most?')
     st.write('6. Should students abstain from alcohol in order to do better in school?')
     st.write('7. Do students in relationships tend to drink more?')
@@ -217,6 +217,36 @@ def analysis():
         q3_df = pd.read_excel('Regression Model Data Management.xlsx')
         st.dataframe(q3_df, hide_index=True)
         st.caption("Based on the coefficients, studying less has a bigger effect on academic performance. The bigger coefficient indicates a bigger impact on Final Grade")
+
+######  Q4  #######
+    with st.expander("What are the common traits among the students who consume alcohol frequently during the week?"):
+        st.title('What are the common traits among the students who consume alcohol frequently during the week?')
+        q4_df = pd.DataFrame(queries.stacked_df1)
+        fig = px.bar(
+            q4_df,
+            x="Category",
+            y="Percent Of Total",
+            color="Trait",
+            text="Percent Of Total",
+            title="Percent Distribution of Common Traits among Workday Alcohol Consumers",
+            labels={
+                "Category": "Category",
+                "Percent Of Total": "Percent of Total (%)"
+            }
+        )
+
+         # Customize hover information
+        fig.update_traces(
+            texttemplate='%{text}%',
+            hovertemplate=(
+                "Workday Alcohol Consumption Level: 4 or 5<br>"
+                "Percent of Total: %{y}%<br>"
+                #"Trait: %{customdata}"
+            )#,
+            #customdata=q4_df["Trait"]
+        )
+        st.plotly_chart(fig)
+        st.caption("From the graph, there do appear to be common traits of the students who drink a lot during the work week (have a 4 or 5 rating). Such common traits are being male, having parents that live together, having a higher education, and not being tutored. By knowing a student has these traits, it can be assumed they are more likely to have higher alcohol consumption during the work week.")
 
 ######  Q5  #######
     with st.expander("What influences academic performance the most?"):
