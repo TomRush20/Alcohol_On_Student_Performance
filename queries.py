@@ -312,3 +312,47 @@ ORDER BY
 	student.workday_alcohol;
 """
 Q10 = sqlite_to_dataframe(Q10)
+
+Q10_2 = """
+SELECT
+	CASE 
+		WHEN workday_alcohol = 1 AND weekend_alcohol >= 3 THEN "Weekend Only Drinkers"
+		WHEN workday_alcohol >= 2 AND weekend_alcohol >= 3 THEN"Any Day Drinkers"
+	END AS "Drinker Category",	
+	g.final_grade AS 'Final Grade',
+	COUNT(final_grade) AS 'Count of Final Grade'
+FROM
+	student s
+INNER JOIN grades g
+		USING(student_id)
+WHERE s.weekend_alcohol >= 3 AND (workday_alcohol = 1 OR workday_alcohol >=3)
+GROUP BY "Drinker Category", final_grade 
+"""
+Q10_2 = sqlite_to_dataframe(Q10_2)
+
+Q10_3 = """
+SELECT
+    drinker_category,
+    final_grade,
+    COUNT(final_grade) AS count_of_final_grade,
+    ROUND(
+        COUNT(final_grade) * 100.0 / SUM(COUNT(final_grade)) OVER (PARTITION BY drinker_category),
+        2
+    ) AS percentage_of_category
+FROM (
+    SELECT
+        CASE 
+            WHEN workday_alcohol = 1 AND weekend_alcohol >= 3 THEN "Weekend Only Drinkers"
+            WHEN workday_alcohol >= 2 AND weekend_alcohol >= 3 THEN "Any Day Drinkers"
+        END AS drinker_category,	
+        g.final_grade AS final_grade
+    FROM
+        student s
+    INNER JOIN grades g
+        USING(student_id)
+    WHERE s.weekend_alcohol >= 3 AND (workday_alcohol = 1 OR workday_alcohol >= 3)
+) subquery
+GROUP BY drinker_category, final_grade
+ORDER BY drinker_category, final_grade;
+"""
+Q10_3 = sqlite_to_dataframe(Q10_3)

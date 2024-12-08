@@ -60,14 +60,12 @@ def home():
     st.write('1. Does alcohol consumption affect student performance?')
     st.write('2. Is alcohol consumption a significant predictor of academic success?')
     st.write('3. Does study time or alcohol consumption have more of an impact on academic performance?')
-    st.write('4. What are the common traits among the students who consume alcohol frequently during the week?')
+    st.write('4. What are the common traits among the students who frequently consume alcohol during the week?')
     st.write('5. What influences academic performance the most?')
     st.write('6. Should students abstain from alcohol in order to do better in school?')
     st.write('7. Do students in relationships tend to drink more?')
     st.write('8. How does alcohol consumption vary among genders?')
     st.write('9. Does going out tend to get in the way of studying?')
-    st.write('10. Do students who only drink on weekends tend to perform better in school?')
-
 
 def data():
     data_icon = 'https://cdn-icons-png.flaticon.com/512/5135/5135755.png'
@@ -108,6 +106,7 @@ def data():
     with col1:
         with st.container(border=True):
             # Custom filter
+            st.markdown("<h4 style='text-align: center;'>Custom Filter</h4>", unsafe_allow_html=True)
             filter_field = st.selectbox("Select the field you would like to filter", options=overview_df.columns, placeholder="Select Field", index=None)
             filter_value = st.text_input("Specify a value to filter by", placeholder="Enter Value")
             if st.button("Apply Filter"):
@@ -164,8 +163,7 @@ def data():
         st.metric("Total Records", overview_df.shape[0])
     
     with col2:
-        st.metric("Total Features", overview_df.shape[1])
-    
+        st.metric("Total Features", overview_df.shape[1])    
     st.divider()
 
     #Data Dictionary
@@ -219,8 +217,8 @@ def analysis():
         st.caption("Based on the coefficients, studying less has a bigger effect on academic performance. The bigger coefficient indicates a bigger impact on Final Grade")
 
 ######  Q4  #######
-    with st.expander("What are the common traits among the students who consume alcohol frequently during the week?"):
-        st.title('What are the common traits among the students who consume alcohol frequently during the week?')
+    with st.expander("What are the common traits among the students who frequently consume alcohol during the week?"):
+        st.title('What are the common traits among the students who frequently consume alcohol during the week?')
         q4_df = pd.DataFrame(queries.stacked_df1)
         fig = px.bar(
             q4_df,
@@ -246,7 +244,7 @@ def analysis():
             #customdata=q4_df["Trait"]
         )
         st.plotly_chart(fig)
-        st.caption("From the graph, there do appear to be common traits of the students who drink a lot during the work week (have a 4 or 5 rating). Such common traits are being male, having parents that live together, having a higher education, and not being tutored. By knowing a student has these traits, it can be assumed they are more likely to have higher alcohol consumption during the work week.")
+        st.caption("From the graph, there do appear to be common traits of the students who drink a lot during the work week (have a 4 or 5 rating). Such common traits are being male, having parents that live together, pursuing a higher education, and not being tutored. By knowing a student has these traits, it can be assumed they are more likely to have higher alcohol consumption during the work week.")
 
 ######  Q5  #######
     with st.expander("What influences academic performance the most?"):
@@ -309,9 +307,9 @@ def analysis():
         # Create a bar chart using Plotly Express
         fig = px.bar(
             Q8_plot,
-            x="Gender",
+            x="Consumption Type",
             y="Average Consumption",
-            color="Consumption Type",
+            color="Gender",
             barmode="group",
             title="Alcohol Consumption by Gender",
             labels={"Gender": "Gender", "Average Consumption": "Average Consumption Ranking (1-5)"}
@@ -337,6 +335,34 @@ def analysis():
         st.plotly_chart(fig)
         
         st.caption("Going out to parties and study time has an inverse relationship. The more parties students go to, the less time they spend studying. Students who do well tend to spend more time styding and less time going to parties. ")
+
+######  Q10  #######
+    with st.expander("Do students who only drink on weekends tend to perform better in school?"):
+        st.title('Do students who only drink on weekends tend to perform better in school?')
+        Q10 = pd.DataFrame(queries.Q10_3)
+        grade_order = ['A+', 'A', 'B', 'C', 'F']
+        Q10["final_grade"] = pd.Categorical(Q10["final_grade"], categories=grade_order, ordered=True)
+        Q10 = Q10.sort_values("final_grade") 
+        fig = px.bar(
+        Q10,
+        x="drinker_category",
+        y="percentage_of_category",
+        color="final_grade",
+        barmode="group",
+        title="Grade Distribution by Drinker Category",
+        labels={"Percentage of Category": "Percentage (%)", "Drinker Category": "Drinker Category"},
+        category_orders={"Final Grade": grade_order}
+        )
+
+    # Customize the layout
+        fig.update_layout(
+        xaxis_title="Drinker Category",
+        yaxis_title="Percentage (%)",
+        template="plotly_white"
+        )
+        st.plotly_chart(fig)
+        st.caption("Students who only drink on weekends tend to perform slightly better in school. However, the difference is not significant enough to say that drinking only on weekends is a predictor of academic success - any heavy drinking significantly decreases academic performance.")
+
 
 
 def team():    
@@ -374,7 +400,7 @@ def team():
         {"name": "Patrick Sweeney", "title": "Data Analyst",  "image": patrick},
         {"name": "Tom Rush", "title": "Design Lead", "image": tom},
         {"name": "Herman Hesby", "title": "Organizer", "image": herman},
-        {"name": "Christian Agreda", "title": "Model Developer/Test Subject/Groupie",  "image": groupie},
+        {"name": "Christian Agreda", "title": "Model Developer/Test Subject",  "image": groupie},
     ]
 
     # Create columns for team members

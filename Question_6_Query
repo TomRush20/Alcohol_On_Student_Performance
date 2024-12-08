@@ -1,4 +1,0 @@
-SELECT DISTINCT student.student_id, (student.workday_alcohol + student.weekend_alcohol) AS Alcohol_Consumption, grades.final_grade 
-FROM student
-INNER JOIN grades 
-ON student.student_id = grades.student_id;
