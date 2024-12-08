@@ -66,6 +66,7 @@ def home():
     st.write('7. Do students in relationships tend to drink more?')
     st.write('8. How does alcohol consumption vary among genders?')
     st.write('9. Does going out tend to get in the way of studying?')
+    st.write('10. Do students who only drink on weekends tend to perform better in school?')
 
 def data():
     data_icon = 'https://cdn-icons-png.flaticon.com/512/5135/5135755.png'
